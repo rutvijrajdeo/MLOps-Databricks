@@ -18,5 +18,5 @@ jobs:
       - name: Azure PowerShell Action
         uses: Azure/powershell@v1
         with:
-          inlineScript: Get-AzResourceGroup -Name "< YOUR RESOURCE GROUP >"
+          inlineScript: Get-AzResourceGroup -Name "rg_mlops_session"
           azPSVersion: "latest"
