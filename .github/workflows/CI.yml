@@ -1,0 +1,25 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  connect-and-pull:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Connect to Azure Databricks
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Git Pull in Databricks Repository
+      run: |
+        # Assuming your Databricks repository is cloned in a directory named 'databricks-repo'
+        cd databricks-repo
+        git pull
