@@ -1,0 +1,36 @@
+name: Azure Databricks CD Pipeline
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Databricks CLI
+      run: |
+        pip install databricks-cli
+
+    - name: Connect to Azure Databricks
+      env:
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+      run: |
+        export DATABRICKS_HOST="${DATABRICKS_HOST}"
+        export DATABRICKS_TOKEN="${DATABRICKS_TOKEN}"
+
+    - name: Git Pull
+      run: git pull
+
+    - name: Trigger Databricks Job
+      run: |
+        databricks jobs run-now --job-id 313789441343090
+      env:
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
