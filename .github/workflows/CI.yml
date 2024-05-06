@@ -18,8 +18,8 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Git Pull in Databricks Repository
-      run: |
-        # Assuming your Databricks repository is cloned in a directory named 'databricks-repo'
-        cd MLOps-Databricks
-        git pull
+    - name: Trigger Databricks Staging Job
+      run: databricks jobs run-now --job-id 156051470984333 
+      env:
+        DATABRICKS_HOST: https://adb-952660073371703.3.azuredatabricks.net
+        DATABRICKS_TOKEN: dapiaa0068bdd5b891321b73aa61a8d2acba
