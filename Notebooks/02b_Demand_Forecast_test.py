@@ -10,7 +10,7 @@ final_data = read_deltaTable("abfss://mlops-dataset@mlopsstorage1705.dfs.core.wi
 def forecast_rolling_13_weeks(group):
     model = ExponentialSmoothing(group['Sales_Units_updated'], seasonal='additive', seasonal_periods=13)
     fitted_model = model.fit()
-    forecast = fitted_model.forecast(steps=13)
+    forecast = fitted_model.forecast(steps=15)
     # Generate a date range for each forecast step
     # forecast_dates = pd.date_range(start=group['week_start'].max() + pd.Timedelta(days=7), periods=13, freq='W')
     forecast_dates = pd.date_range(start=group['week_start'].max(), periods=13, freq='W')+pd.Timedelta(days=1)
