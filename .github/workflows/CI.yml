@@ -1,25 +1,30 @@
-name: CI Pipeline
+name: Azure Databricks CI Pipeline
 
 on:
-  push:
+  pull_request:
     branches:
       - main
 
 jobs:
-  connect-and-pull:
+  build:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Connect to Azure Databricks
-      uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: Install Databricks CLI
+      run: |
+        wget -O /tmp/databricks-cli.tar.gz https://files.pythonhosted.org/packages/9c/c9/1069d2a8b6728ddc6082df6b8b4864a9e41a9c0f8a3a30643a63664ffea6/databricks-cli-0.14.3.tar.gz
+        tar -xzf /tmp/databricks-cli.tar.gz -C /tmp/
+        sudo /tmp/databricks-cli-0.14.3/install.sh
 
-    - name: Trigger Databricks Staging Job
-      run: databricks jobs run-now --job-id 156051470984333 
-      env:
-        DATABRICKS_HOST: https://adb-952660073371703.3.azuredatabricks.net
-        DATABRICKS_TOKEN: dapiaa0068bdd5b891321b73aa61a8d2acba
+    - name: Connect to Azure Databricks
+      run: |
+        databricks configure --host "https://adb-952660073371703.3.azuredatabricks.net/" --token "dapiaa0068bdd5b891321b73aa61a8d2acba"
+
+    - name: Git Pull
+      run: git pull
+
+    - name: Trigger Databricks Job
+      run: databricks jobs run-now --job-id 156051470984333
