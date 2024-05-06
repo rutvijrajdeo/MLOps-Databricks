@@ -21,6 +21,7 @@ jobs:
       run: |
         databricks configure --host "https://adb-952660073371703.3.azuredatabricks.net/" 
         databricks configure --token "dapiaa0068bdd5b891321b73aa61a8d2acba"
+        databricks configure --username ""
 
     - name: Git Pull
       run: git pull
