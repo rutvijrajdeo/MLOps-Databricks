@@ -19,8 +19,8 @@ jobs:
 
     - name: Connect to Azure Databricks
       env:
-        DATABRICKS_HOST: "https://adb-952660073371703.3.azuredatabricks.net/"
-        DATABRICKS_TOKEN: "dapiaa0068bdd5b891321b73aa61a8d2acba"
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
       run: |
         export DATABRICKS_HOST="${DATABRICKS_HOST}"
         export DATABRICKS_TOKEN="${DATABRICKS_TOKEN}"
@@ -33,6 +33,6 @@ jobs:
       run: |
         databricks jobs run-now --job-id 156051470984333
       env:
-        DATABRICKS_HOST: "https://adb-952660073371703.3.azuredatabricks.net/"
-        DATABRICKS_TOKEN: "dapiaa0068bdd5b891321b73aa61a8d2acba"
+        DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+        DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
       
