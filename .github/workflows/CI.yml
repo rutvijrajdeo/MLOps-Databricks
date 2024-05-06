@@ -3,7 +3,7 @@ name: Azure Databricks CI Pipeline
 on:
   push:
     branches:
-      - main
+      - test
 
 jobs:
   build:
