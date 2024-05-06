@@ -18,10 +18,13 @@ jobs:
         pip install databricks-cli
 
     - name: Connect to Azure Databricks
+      env:
+        DATABRICKS_HOST: "https://adb-952660073371703.3.azuredatabricks.net/"
+        DATABRICKS_TOKEN: "dapiaa0068bdd5b891321b73aa61a8d2acba"
       run: |
-        databricks configure --host "https://adb-952660073371703.3.azuredatabricks.net/" 
-        databricks configure --token "dapiaa0068bdd5b891321b73aa61a8d2acba"
-        databricks configure --username ""
+        export DATABRICKS_HOST="${DATABRICKS_HOST}"
+        export DATABRICKS_TOKEN="${DATABRICKS_TOKEN}"
+
 
     - name: Git Pull
       run: git pull
