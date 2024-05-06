@@ -15,9 +15,7 @@ jobs:
 
     - name: Install Databricks CLI
       run: |
-        wget -O /tmp/databricks-cli.tar.gz https://files.pythonhosted.org/packages/9c/c9/1069d2a8b6728ddc6082df6b8b4864a9e41a9c0f8a3a30643a63664ffea6/databricks-cli-0.14.3.tar.gz
-        tar -xzf /tmp/databricks-cli.tar.gz -C /tmp/
-        sudo /tmp/databricks-cli-0.14.3/install.sh
+        pip install databricks-cli
 
     - name: Connect to Azure Databricks
       run: |
