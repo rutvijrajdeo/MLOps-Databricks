@@ -21,5 +21,5 @@ jobs:
     - name: Git Pull in Databricks Repository
       run: |
         # Assuming your Databricks repository is cloned in a directory named 'databricks-repo'
-        cd /Workspace/Repos/rutvijrajdeo@outlook.com/MLOps-Databricks
+        cd MLOps-Databricks
         git pull
