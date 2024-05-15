@@ -24,8 +24,7 @@ jobs:
       run: |
         export DATABRICKS_HOST="${DATABRICKS_HOST}"
         export DATABRICKS_TOKEN="${DATABRICKS_TOKEN}"
-
-
+        
     - name: Git Pull
       run: git pull
 

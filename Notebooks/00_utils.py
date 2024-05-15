@@ -123,12 +123,3 @@ def write_deltaTable(py_df, zorder_col, delta_filepath, over_write_schema ="fals
                                       .option("overWriteSchema", over_write_schema)\
                                       .option("dataChange", data_change)\
                                       .save(delta_filepath)
-
-# COMMAND ----------
-
-# MAGIC %md
-# MAGIC ### Paths
-
-# COMMAND ----------
-
-

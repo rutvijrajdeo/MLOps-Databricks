@@ -19,13 +19,13 @@ hist_data = read_csv(
     "abfss://mlops-dataset@mlopsstorage1705.dfs.core.windows.net/Histiorical_dataset"
 )
 hist_data = (
-    hist_data.withColumn("week_start", F.col("week_start").cast('date'))
+    hist_data.withColumn("week_start", F.col("week_start").cast("date"))
     .withColumn("Sales_Units", F.col("Sales_Units").cast("integer"))
     .withColumn("Sales_Units_rand", F.col("Sales_Units_rand").cast("integer"))
     .withColumnRenamed("Sales_Units_rand", "Sales_Units_updated")
 )
 
-hist_data.groupBy('Class').agg(F.min('week_start'),F.max('week_start')).display()
+hist_data.groupBy("Class").agg(F.min("week_start"), F.max("week_start")).display()
 
 # COMMAND ----------
 
@@ -38,13 +38,13 @@ inc_data = read_csv(
     "abfss://mlops-dataset@mlopsstorage1705.dfs.core.windows.net/Incremental_dataset"
 )
 inc_data = (
-    inc_data.withColumn("week_start", F.col("week_start").cast('date'))
+    inc_data.withColumn("week_start", F.col("week_start").cast("date"))
     .withColumn("Sales_Units", F.col("Sales_Units").cast("integer"))
     .withColumn("Sales_Units_rand", F.col("Sales_Units_rand").cast("integer"))
     .withColumnRenamed("Sales_Units_rand", "Sales_Units_updated")
 )
 
-inc_data.groupBy('Class').agg(F.min('week_start'),F.max('week_start')).display()
+inc_data.groupBy("Class").agg(F.min("week_start"), F.max("week_start")).display()
 
 # COMMAND ----------
 
@@ -65,7 +65,7 @@ final_data.count(), final_data.dropDuplicates().count()
 
 # COMMAND ----------
 
-final_data.groupBy('Class').agg(F.min('week_start'),F.max('week_start')).display()
+final_data.groupBy("Class").agg(F.min("week_start"), F.max("week_start")).display()
 
 # COMMAND ----------
 
@@ -74,6 +74,8 @@ final_data.groupBy('Class').agg(F.min('week_start'),F.max('week_start')).display
 
 # COMMAND ----------
 
-write_deltaTable(py_df = final_data,
-                 zorder_col = ['Class','Store','week_start'],
-                 delta_filepath = 'abfss://mlops-dataset@mlopsstorage1705.dfs.core.windows.net/Final_dataset')
+write_deltaTable(
+    py_df=final_data,
+    zorder_col=["Class", "Store", "week_start"],
+    delta_filepath="abfss://mlops-dataset@mlopsstorage1705.dfs.core.windows.net/Final_dataset",
+)
