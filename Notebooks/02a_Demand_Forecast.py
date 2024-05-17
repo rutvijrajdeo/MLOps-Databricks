@@ -10,7 +10,7 @@ final_data = read_deltaTable(
 # COMMAND ----------
 
 def forecast_rolling_weeks(group):
-    n_weeks = 13
+    n_weeks = 26 ### Extending forecast hosizon
     model = ExponentialSmoothing(
         group["Sales_Units_updated"], seasonal="additive", seasonal_periods=n_weeks
     )

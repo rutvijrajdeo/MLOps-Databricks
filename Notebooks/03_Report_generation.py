@@ -6,6 +6,7 @@
 sales_data = read_deltaTable(
     "abfss://mlops-dataset@mlopsstorage1705.dfs.core.windows.net/Final_dataset"
 ).drop("Sales_Units")
+
 forecast_data = read_deltaTable(
     "abfss://mlops-dataset@mlopsstorage1705.dfs.core.windows.net/Forecast_Sales_Output"
 )
