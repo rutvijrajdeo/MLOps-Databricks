@@ -10,7 +10,7 @@ final_data = read_deltaTable(
 # COMMAND ----------
 
 def forecast_rolling_weeks(group):
-    n_weeks = 13
+    n_weeks = 26 ### Extending forecast horizon
     model = ExponentialSmoothing(
         group["Sales_Units_updated"], seasonal="additive", seasonal_periods=n_weeks
     )
@@ -32,6 +32,8 @@ def forecast_rolling_weeks(group):
     return forecast_df
 
 # COMMAND ----------
+
+#### Filter sample dataset
 
 data = (
     final_data.select("Class", "Store", "week_start", "Sales_Units_updated")
